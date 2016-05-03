@@ -8,7 +8,7 @@ import java.io.InputStream;
 
 public class AddServlet extends HttpServlet {
 
-    private MessageList msgList = MessageList.getInstance();
+    private MessageList msgList = MessageList.INSTANCE;
 
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws IOException {

@@ -8,10 +8,9 @@ import java.io.OutputStream;
 
 public class GetListServlet extends HttpServlet {
 
-    private MessageList msgList = MessageList.getInstance();
+    private MessageList msgList = MessageList.INSTANCE;
 
-    public void doGet(HttpServletRequest req, HttpServletResponse resp)
-            throws IOException {
+    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String fromStr = req.getParameter("from");
         int from = Integer.parseInt(fromStr);
 
