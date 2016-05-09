@@ -26,16 +26,25 @@ public class CreateMessageServlet extends HttpServlet {
     private MessagingService messagingService = MessagingService.INSTANCE;
 
     @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        execute(req, resp);
+    }
+
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        execute(req, resp);
+    }
+
+    private void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String paramConversationId = req.getParameter(PARAM_CONVERSATION_ID);
         if (!Validator.isInt(paramConversationId)) {
-            //TODO: send error message to client
+            resp.getWriter().println("ERROR: illegal conversation id");
             return;
         }
 
         String paramSenderId = req.getParameter(PARAM_SENDER_ID);
         if (!Validator.isInt(paramConversationId)) {
-            //TODO: send error message to client
+            resp.getWriter().println("ERROR: illegal sender id");
             return;
         }
 
@@ -49,7 +58,7 @@ public class CreateMessageServlet extends HttpServlet {
             String jsonMessage = new Gson().toJson(message);
             resp.getWriter().println(jsonMessage);
         } catch (MessagingException e) {
-            //TODO: send error message to client
+            resp.getWriter().println("INTERNAL SERVER ERROR");
             return;
         }
     }

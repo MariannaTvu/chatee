@@ -20,7 +20,16 @@ public class CreateConversationServlet extends HttpServlet {
     private MessagingService messagingService = MessagingService.INSTANCE;
 
     @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        execute(req, resp);
+    }
+
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        execute(req, resp);
+    }
+
+    private void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         Conversation conversation = messagingService.createConversation();
 
         String jsonConversation = new Gson().toJson(conversation);
