@@ -3,4 +3,4 @@
  *
  * @author bvanchuhov
  */
-package service;
+package com.bvan.chatee.service;

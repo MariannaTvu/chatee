@@ -1,15 +1,15 @@
-package service.messaging;
+package com.bvan.chatee.service.messaging;
 
-import service.messaging.exception.ConversationNotFoundException;
-import service.messaging.exception.MessagingException;
-import service.messaging.exception.NotLinkedUserException;
+import com.bvan.chatee.service.messaging.exception.ConversationNotFoundException;
+import com.bvan.chatee.service.messaging.exception.MessagingException;
+import com.bvan.chatee.service.messaging.exception.NotLinkedUserException;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Messaging service intended for manipulations with conversations (chat rooms).
+ * Messaging com.bvan.chatee.service intended for manipulations with conversations (chat rooms).
  *
  * @author bvanchuhov
  */

@@ -3,4 +3,4 @@
  *
  * @author bvanchuhov
  */
-package presentation;
+package com.bvan.chatee.presentation;

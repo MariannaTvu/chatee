@@ -1,4 +1,4 @@
-package service.account;
+package com.bvan.chatee.service.account;
 
 import java.util.Objects;
 

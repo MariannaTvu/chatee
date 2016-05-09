@@ -1,10 +1,10 @@
-package presentation;
+package com.bvan.chatee.presentation;
 
 import com.google.gson.Gson;
-import common.Validator;
-import service.messaging.Message;
-import service.messaging.MessagingService;
-import service.messaging.exception.MessagingException;
+import com.bvan.chatee.common.Validator;
+import com.bvan.chatee.service.messaging.Message;
+import com.bvan.chatee.service.messaging.MessagingService;
+import com.bvan.chatee.service.messaging.exception.MessagingException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

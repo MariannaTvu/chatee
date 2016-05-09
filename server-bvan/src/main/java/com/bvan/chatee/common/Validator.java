@@ -1,4 +1,4 @@
-package common;
+package com.bvan.chatee.common;
 
 /**
  * Utilities class contains helpful validation methods.

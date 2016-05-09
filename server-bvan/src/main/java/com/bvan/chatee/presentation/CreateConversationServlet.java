@@ -1,8 +1,8 @@
-package presentation;
+package com.bvan.chatee.presentation;
 
 import com.google.gson.Gson;
-import service.messaging.Conversation;
-import service.messaging.MessagingService;
+import com.bvan.chatee.service.messaging.Conversation;
+import com.bvan.chatee.service.messaging.MessagingService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

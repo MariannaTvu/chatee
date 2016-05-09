@@ -1,4 +1,4 @@
-package service.messaging;
+package com.bvan.chatee.service.messaging;
 
 import java.util.Date;
 import java.util.Objects;

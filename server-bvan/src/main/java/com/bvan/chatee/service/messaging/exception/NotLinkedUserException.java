@@ -1,4 +1,4 @@
-package service.messaging.exception;
+package com.bvan.chatee.service.messaging.exception;
 
 /**
  * @author bvanchuhov
