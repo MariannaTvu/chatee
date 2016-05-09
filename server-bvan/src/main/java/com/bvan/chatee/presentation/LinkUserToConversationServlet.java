@@ -2,6 +2,8 @@ package com.bvan.chatee.presentation;
 
 import com.bvan.chatee.service.messaging.MessagingService;
 import com.bvan.chatee.service.messaging.exception.ConversationNotFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,6 +17,8 @@ import java.io.IOException;
  */
 @WebServlet(urlPatterns = "/conversation/link_to_conversation")
 public class LinkUserToConversationServlet extends HttpServlet {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(LinkUserToConversationServlet.class);
 
     private static final String PARAM_CONVERSATION_ID = "conversationId";
     private static final String PARAM_SENDER_ID = "userId";
@@ -38,7 +42,7 @@ public class LinkUserToConversationServlet extends HttpServlet {
         try {
             messagingService.linkUserToConversation(conversationId, userId);
         } catch (ConversationNotFoundException e) {
-            e.printStackTrace();
+            LOGGER.debug("conversation " + conversationId + " not found", e);
         }
     }
 }
