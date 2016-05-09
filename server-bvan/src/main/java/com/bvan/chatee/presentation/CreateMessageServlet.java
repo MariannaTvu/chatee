@@ -7,6 +7,7 @@ import com.bvan.chatee.service.messaging.MessagingService;
 import com.bvan.chatee.service.messaging.exception.MessagingException;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,6 +18,7 @@ import java.io.IOException;
  *
  * @author bvanchuhov
  */
+@WebServlet(urlPatterns = "/message/create")
 public class CreateMessageServlet extends HttpServlet {
 
     private static final String PARAM_CONVERSATION_ID = "conversationId";
