@@ -9,9 +9,9 @@ import java.util.Objects;
  */
 public class Account {
 
-    private static final int nextId = 0;
+    private static int nextId = 0;
 
-    private final int id = nextId;
+    private final int id = nextId++;
     private final String login;
     private String password;
 

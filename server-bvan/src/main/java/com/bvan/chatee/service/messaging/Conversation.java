@@ -9,9 +9,9 @@ import java.util.*;
  */
 public class Conversation {
 
-    private static final int nextId = 0;
+    private static int nextId = 0;
 
-    private final int id = nextId;
+    private final int id = nextId++;
 
     /**
      * Synchronized set of linked user ids.
