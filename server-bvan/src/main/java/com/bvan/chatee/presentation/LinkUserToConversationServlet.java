@@ -16,9 +16,8 @@ import java.io.IOException;
 @WebServlet(urlPatterns = "/conversation/link_to_conversation")
 public class LinkUserToConversationServlet extends HttpServlet {
 
-    //TODO: please, implement this functionality. i love you, darling)
     private static final String PARAM_CONVERSATION_ID = "conversationId";
-    private static final String PARAM_SENDER_ID = "senderId";
+    private static final String PARAM_SENDER_ID = "userId";
 
     private MessagingService messagingService = MessagingService.INSTANCE;
 
@@ -33,11 +32,11 @@ public class LinkUserToConversationServlet extends HttpServlet {
     }
 
     private void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        int conversationId = Integer.parseInt(req.getParameter(PARAM_CONVERSATION_ID));
+        int userId = Integer.parseInt(req.getParameter(PARAM_SENDER_ID));
+
         try {
-            messagingService.linkUserToConversation(
-                    Integer.parseInt(req.getParameter(PARAM_CONVERSATION_ID)),
-                    Integer.parseInt(req.getParameter(PARAM_SENDER_ID))
-            );
+            messagingService.linkUserToConversation(conversationId, userId);
         } catch (ConversationNotFoundException e) {
             e.printStackTrace();
         }
