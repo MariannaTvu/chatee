@@ -14,6 +14,7 @@ public class Account {
     private final int id = nextId++;
     private final String login;
     private String password;
+    private boolean status;
 
 
     public Account(String login) {
@@ -37,6 +38,15 @@ public class Account {
         return this;
     }
 
+    public boolean isOnline() {
+        return status;
+    }
+
+    public Account setStatus(boolean status) {
+        this.status = status;
+        return this;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -57,6 +67,7 @@ public class Account {
                 "id=" + id +
                 ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
+                ", is online='" + status + '\'' +
                 '}';
     }
 }

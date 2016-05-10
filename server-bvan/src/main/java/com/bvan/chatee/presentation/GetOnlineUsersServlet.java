@@ -1,9 +1,7 @@
 package com.bvan.chatee.presentation;
 
-import com.bvan.chatee.common.ChatUtils;
 import com.bvan.chatee.service.account.Account;
 import com.bvan.chatee.service.account.AccountService;
-import com.google.gson.Gson;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,12 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by Maryana on 10.05.2016.
  */
-@WebServlet(urlPatterns = "/account/create")
-public class CreateAccountServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/users_online")
+public class GetOnlineUsersServlet extends HttpServlet {
     private AccountService accountService = AccountService.INSTANCE;
 
     @Override
@@ -30,17 +29,7 @@ public class CreateAccountServlet extends HttpServlet {
     }
 
     private void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-
-        String username = req.getParameter(ChatUtils.getParamSenderUsername());
-        String password = req.getParameter(ChatUtils.getParamSenderPassword());
-
-        if (accountService.checkUsername(username) == null) {
-            Account account = accountService.createAccount(username);
-            account.setPassword(password);
-            String jsonAccount = new Gson().toJson(account);
-            resp.getWriter().println(jsonAccount);
-        } else {
-            resp.getWriter().print("sorry, name is taken");
-        }
+        List<Account> loggedInUsers = accountService.getLoggedIn();
+        resp.getWriter().println("online users: " + loggedInUsers);
     }
 }
