@@ -1,5 +1,6 @@
 package com.bvan.chatee.presentation;
 
+import com.bvan.chatee.common.ChatUtils;
 import com.bvan.chatee.service.messaging.MessagingService;
 import com.bvan.chatee.service.messaging.exception.ConversationNotFoundException;
 import org.slf4j.Logger;
@@ -20,9 +21,6 @@ public class LinkUserToConversationServlet extends HttpServlet {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LinkUserToConversationServlet.class);
 
-    private static final String PARAM_CONVERSATION_ID = "conversationId";
-    private static final String PARAM_SENDER_ID = "userId";
-
     private MessagingService messagingService = MessagingService.INSTANCE;
 
     @Override
@@ -36,8 +34,8 @@ public class LinkUserToConversationServlet extends HttpServlet {
     }
 
     private void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        int conversationId = Integer.parseInt(req.getParameter(PARAM_CONVERSATION_ID));
-        int userId = Integer.parseInt(req.getParameter(PARAM_SENDER_ID));
+        int conversationId = Integer.parseInt(req.getParameter(ChatUtils.getParamConversationId()));
+        int userId = Integer.parseInt(req.getParameter(ChatUtils.getParamSenderId()));
 
         try {
             messagingService.linkUserToConversation(conversationId, userId);

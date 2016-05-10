@@ -1,5 +1,6 @@
 package com.bvan.chatee.presentation;
 
+import com.bvan.chatee.common.ChatUtils;
 import com.bvan.chatee.service.messaging.Conversation;
 import com.bvan.chatee.service.messaging.Message;
 import com.bvan.chatee.service.messaging.MessagingService;
@@ -22,7 +23,6 @@ import java.util.List;
 @WebServlet(urlPatterns = "/messages")
 public class GetMessagesServlet extends HttpServlet {
     private static final Logger LOGGER = LoggerFactory.getLogger(LinkUserToConversationServlet.class);
-    private static final String PARAM_CONVERSATION_ID = "conversationId";
 
     private MessagingService messagingService = MessagingService.INSTANCE;
 
@@ -37,7 +37,7 @@ public class GetMessagesServlet extends HttpServlet {
     }
 
     private void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        int conversationId = Integer.parseInt(req.getParameter(PARAM_CONVERSATION_ID));
+        int conversationId = Integer.parseInt(req.getParameter(ChatUtils.getParamConversationId()));
 
         try {
             Conversation conversation = messagingService.getConversationById(conversationId);

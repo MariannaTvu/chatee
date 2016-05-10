@@ -15,6 +15,7 @@ public class Account {
     private final String login;
     private String password;
 
+
     public Account(String login) {
         this.login = login;
     }
