@@ -1,7 +1,9 @@
 package com.bvan.chatee.presentation.messaging;
 
+import com.bvan.chatee.service.messaging.Conversation;
 import com.bvan.chatee.service.messaging.MessagingService;
 import com.bvan.chatee.service.messaging.exception.ConversationNotFoundException;
+import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,7 +20,7 @@ import static com.bvan.chatee.common.ChatConstants.Params.PARAM_USER_ID;
 /**
  * @author bvanchuhov
  */
-@WebServlet(urlPatterns = "/conversation/link_to_conversation")
+@WebServlet(urlPatterns = "/conv/link")
 public class LinkUserToConversationServlet extends HttpServlet {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LinkUserToConversationServlet.class);
@@ -41,6 +43,10 @@ public class LinkUserToConversationServlet extends HttpServlet {
 
         try {
             messagingService.linkUserToConversation(conversationId, userId);
+
+            Conversation conversation = messagingService.getConversationById(conversationId);
+            String jsonConversation = new Gson().toJson(conversation);
+            resp.getWriter().println(jsonConversation);
         } catch (ConversationNotFoundException e) {
             LOGGER.debug("conversation " + conversationId + " not found", e);
         }

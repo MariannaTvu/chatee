@@ -21,7 +21,7 @@ import static com.bvan.chatee.common.ChatConstants.Params.PARAM_CONVERSATION_ID;
 /**
  * Created by Maryana on 09.05.2016.
  */
-@WebServlet(urlPatterns = "/messages")
+@WebServlet(urlPatterns = "/msgs")
 public class GetMessagesServlet extends HttpServlet {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LinkUserToConversationServlet.class);

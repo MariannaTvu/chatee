@@ -19,7 +19,7 @@ public final class ChatConstants {
         public static final String PARAM_MESSAGE_TEXT = "text";
         public static final String PARAM_SENDER_USERNAME = "username";
         public static final String PARAM_SENDER_PASSWORD = "password";
-
+        public static final String PARAM_RESPONSE_TYPE = "respType";
         private Params() {
         }
     }

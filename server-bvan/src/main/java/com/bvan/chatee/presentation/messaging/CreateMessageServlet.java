@@ -20,7 +20,7 @@ import static com.bvan.chatee.common.ChatConstants.Params.*;
  *
  * @author bvanchuhov
  */
-@WebServlet(urlPatterns = "/message/create")
+@WebServlet(urlPatterns = "/msg/create")
 public class CreateMessageServlet extends HttpServlet {
 
     private MessagingService messagingService = MessagingService.INSTANCE;
@@ -52,11 +52,21 @@ public class CreateMessageServlet extends HttpServlet {
         int senderId = Integer.parseInt(paramSenderId);
         String text = req.getParameter(PARAM_MESSAGE_TEXT);
 
+        String respType = req.getParameter(PARAM_RESPONSE_TYPE);
+
         try {
             Message message = messagingService.createMessage(conversationId, senderId, text);
 
-            String jsonMessage = new Gson().toJson(message);
-            resp.getWriter().println(jsonMessage);
+            switch (respType) {
+                case "json":
+                    String jsonMessage = new Gson().toJson(message);
+                    resp.getWriter().println(jsonMessage);
+                    break;
+                case "html":
+                    resp.sendRedirect("/chatroom?convId=" + conversationId);
+                    return;
+            }
+
         } catch (MessagingException e) {
             resp.getWriter().println("INTERNAL SERVER ERROR");
             return;

@@ -22,7 +22,7 @@
             </tr>
 
             <jsp:useBean id="creationDate" class="java.util.Date"/>
-            <c:forEach var="message" items="${messages}">
+            <c:forEach var="message" items="${conversation.messages}">
                 <tr>
                     <td>${message.senderId}</td>
                     <td>
@@ -39,16 +39,20 @@
         <br>
     </div>
 
-    <div class="userIdRequest" align="right">
-        <textarea placeholder="Enter id to join user" rows="1"></textarea>
-        <button>Join</button>
-    </div>
+    <form action="/msg/create" method="post">
+        <input type="hidden" name="convId" value="${conversation.id}"/>
+        <input type="hidden" name="respType" value="html"/>
 
-    <div class="chat-message">
-        <textarea placeholder="Type your message" rows="7"></textarea>
-        <button>Send</button>
-    </div>
+        <div class="userIdRequest">
+            <input type="text" name="userId" placeholder="Your id"></input>
+            <%--<button>Join</button>--%>
+        </div>
 
+        <div class="chat-message">
+            <input type="text" name="text" placeholder="Type your message"></input>
+            <button>Send</button>
+        </div>
+    </form>
 </div>
 
 </body>

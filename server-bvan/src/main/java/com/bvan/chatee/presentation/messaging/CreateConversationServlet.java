@@ -16,7 +16,7 @@ import java.io.IOException;
  *
  * @author bvanchuhov
  */
-@WebServlet(urlPatterns = "/conversation/create")
+@WebServlet(urlPatterns = "/conv/create")
 public class CreateConversationServlet extends HttpServlet {
 
     private MessagingService messagingService = MessagingService.INSTANCE;
