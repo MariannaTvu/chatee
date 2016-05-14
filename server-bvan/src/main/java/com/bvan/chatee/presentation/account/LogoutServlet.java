@@ -1,6 +1,5 @@
-package com.bvan.chatee.presentation;
+package com.bvan.chatee.presentation.account;
 
-import com.bvan.chatee.common.ChatUtils;
 import com.bvan.chatee.service.account.AccountService;
 
 import javax.servlet.ServletException;
@@ -9,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+
+import static com.bvan.chatee.common.ChatConstants.Params.PARAM_SENDER_USERNAME;
 
 /**
  * Created by Maryana on 10.05.2016.
@@ -28,7 +29,7 @@ public class LogoutServlet extends HttpServlet {
     }
 
     private void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        String username = req.getParameter(ChatUtils.getParamSenderUsername());
+        String username = req.getParameter(PARAM_SENDER_USERNAME);
         accountService.logout(username);
         resp.getWriter().println(username + " is logged out");
     }

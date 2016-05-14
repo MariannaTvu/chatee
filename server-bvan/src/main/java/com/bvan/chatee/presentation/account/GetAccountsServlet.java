@@ -1,8 +1,7 @@
-package com.bvan.chatee.presentation;
+package com.bvan.chatee.presentation.account;
 
+import com.bvan.chatee.service.account.AccountService;
 import com.google.gson.Gson;
-import com.bvan.chatee.service.messaging.Conversation;
-import com.bvan.chatee.service.messaging.MessagingService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,16 +9,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Map;
 
 /**
- * Servlet serves conversation creation queries.
- *
- * @author bvanchuhov
+ * Created by Maryana on 10.05.2016.
  */
-@WebServlet(urlPatterns = "/conversation/create")
-public class CreateConversationServlet extends HttpServlet {
-
-    private MessagingService messagingService = MessagingService.INSTANCE;
+@WebServlet(urlPatterns = "/accounts")
+public class GetAccountsServlet extends HttpServlet {
+    private AccountService accountService = AccountService.INSTANCE;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -32,9 +29,8 @@ public class CreateConversationServlet extends HttpServlet {
     }
 
     private void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        Conversation conversation = messagingService.createConversation();
-
-        String jsonConversation = new Gson().toJson(conversation);
-        resp.getWriter().println(jsonConversation);
+        Map accounts = accountService.getAccounts();
+        String jsonAccount = new Gson().toJson(accounts);
+        resp.getWriter().println(jsonAccount);
     }
 }

@@ -1,7 +1,8 @@
-package com.bvan.chatee.presentation;
+package com.bvan.chatee.presentation.messaging;
 
-import com.bvan.chatee.service.account.Account;
-import com.bvan.chatee.service.account.AccountService;
+import com.bvan.chatee.service.messaging.Conversation;
+import com.bvan.chatee.service.messaging.MessagingService;
+import com.google.gson.Gson;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,14 +10,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
 /**
- * Created by Maryana on 10.05.2016.
+ * Servlet serves conversation creation queries.
+ *
+ * @author bvanchuhov
  */
-@WebServlet(urlPatterns = "/users_online")
-public class GetOnlineUsersServlet extends HttpServlet {
-    private AccountService accountService = AccountService.INSTANCE;
+@WebServlet(urlPatterns = "/conversation/create")
+public class CreateConversationServlet extends HttpServlet {
+
+    private MessagingService messagingService = MessagingService.INSTANCE;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -29,7 +32,9 @@ public class GetOnlineUsersServlet extends HttpServlet {
     }
 
     private void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        List<Account> loggedInUsers = accountService.getLoggedIn();
-        resp.getWriter().println("online users: " + loggedInUsers);
+        Conversation conversation = messagingService.createConversation();
+
+        String jsonConversation = new Gson().toJson(conversation);
+        resp.getWriter().println(jsonConversation);
     }
 }

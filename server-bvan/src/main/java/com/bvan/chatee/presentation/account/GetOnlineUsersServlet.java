@@ -1,7 +1,7 @@
-package com.bvan.chatee.presentation;
+package com.bvan.chatee.presentation.account;
 
+import com.bvan.chatee.service.account.Account;
 import com.bvan.chatee.service.account.AccountService;
-import com.google.gson.Gson;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,13 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Map;
+import java.util.List;
 
 /**
  * Created by Maryana on 10.05.2016.
  */
-@WebServlet(urlPatterns = "/accounts")
-public class GetAccountsServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/users_online")
+public class GetOnlineUsersServlet extends HttpServlet {
     private AccountService accountService = AccountService.INSTANCE;
 
     @Override
@@ -29,8 +29,7 @@ public class GetAccountsServlet extends HttpServlet {
     }
 
     private void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        Map accounts = accountService.getAccounts();
-        String jsonAccount = new Gson().toJson(accounts);
-        resp.getWriter().println(jsonAccount);
+        List<Account> loggedInUsers = accountService.getLoggedIn();
+        resp.getWriter().println("online users: " + loggedInUsers);
     }
 }

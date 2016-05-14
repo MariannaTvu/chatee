@@ -1,8 +1,10 @@
-package com.bvan.chatee.presentation;
+package com.bvan.chatee.presentation.messaging;
 
-import com.bvan.chatee.common.ChatUtils;
+import com.bvan.chatee.service.messaging.Conversation;
+import com.bvan.chatee.service.messaging.Message;
 import com.bvan.chatee.service.messaging.MessagingService;
 import com.bvan.chatee.service.messaging.exception.ConversationNotFoundException;
+import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,12 +14,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
+
+import static com.bvan.chatee.common.ChatConstants.Params.PARAM_CONVERSATION_ID;
 
 /**
- * @author bvanchuhov
+ * Created by Maryana on 09.05.2016.
  */
-@WebServlet(urlPatterns = "/conversation/link_to_conversation")
-public class LinkUserToConversationServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/messages")
+public class GetMessagesServlet extends HttpServlet {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LinkUserToConversationServlet.class);
 
@@ -34,11 +39,13 @@ public class LinkUserToConversationServlet extends HttpServlet {
     }
 
     private void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        int conversationId = Integer.parseInt(req.getParameter(ChatUtils.getParamConversationId()));
-        int userId = Integer.parseInt(req.getParameter(ChatUtils.getParamSenderId()));
+        int conversationId = Integer.parseInt(req.getParameter(PARAM_CONVERSATION_ID));
 
         try {
-            messagingService.linkUserToConversation(conversationId, userId);
+            Conversation conversation = messagingService.getConversationById(conversationId);
+            List<Message> messages = conversation.getMessages();
+            String jsonMessages = new Gson().toJson(messages);
+            resp.getWriter().println(jsonMessages);
         } catch (ConversationNotFoundException e) {
             LOGGER.debug("conversation " + conversationId + " not found", e);
         }
