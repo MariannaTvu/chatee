@@ -10,11 +10,11 @@ import java.io.IOException;
 /**
  * @author bvanchuhov
  */
-@WebServlet(urlPatterns = "hello")
+@WebServlet(urlPatterns = "/hello")
 public class HelloServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.sendRedirect("/WEB-INF/Hello.jsp");
+        req.getRequestDispatcher("/WEB-INF/Hello.jsp").forward(req, resp);
     }
 }
