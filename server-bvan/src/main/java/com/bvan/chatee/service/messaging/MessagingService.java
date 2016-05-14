@@ -79,7 +79,7 @@ public enum MessagingService {
         }
 
         Message message = new Message(senderId, text)
-                .setCreatingTime(System.currentTimeMillis());
+                .setCreationTime(System.currentTimeMillis());
         conversation.addMessage(message);
 
         return message;

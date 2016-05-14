@@ -15,7 +15,7 @@ public class Message {
     private final int id = nextId++;
     private int senderId;
     private String text;
-    private long creatingTime;
+    private long creationTime;
 
     public Message(int senderId, String text) {
         this.senderId = senderId;
@@ -44,12 +44,12 @@ public class Message {
         return this;
     }
 
-    public long getCreatingTime() {
-        return creatingTime;
+    public long getCreationTime() {
+        return creationTime;
     }
 
-    public Message setCreatingTime(long creatingTime) {
-        this.creatingTime = creatingTime;
+    public Message setCreationTime(long creationTime) {
+        this.creationTime = creationTime;
         return this;
     }
 
@@ -59,13 +59,13 @@ public class Message {
         if (o == null || getClass() != o.getClass()) return false;
         Message message = (Message) o;
         return senderId == message.senderId &&
-                creatingTime == message.creatingTime &&
+                creationTime == message.creationTime &&
                 Objects.equals(text, message.text);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(senderId, text, creatingTime);
+        return Objects.hash(senderId, text, creationTime);
     }
 
     @Override
@@ -74,7 +74,7 @@ public class Message {
                 "id=" + id +
                 ", senderId=" + senderId +
                 ", text='" + text + '\'' +
-                ", creatingTime=" + new Date(creatingTime) +
+                ", creationTime=" + new Date(creationTime) +
                 '}';
     }
 }
